@@ -1,35 +1,34 @@
-import React from "react";
-
-const Hello = (props) => {
-	return (
-		<div>
-			<p>
-				Hello {props.name}, you are {props.age} years
-				old
-			</p>
-		</div>
-	);
-};
+import React, { useState } from "react";
 
 const App = () => {
-	const name = "Peter";
-	const age = 10;
+	const [value, setValue] = useState(10);
 
-	return (
-		<>
-			<h1>Greetings</h1>
-			<Hello name="Maya" age={26 + 10} />
-			<Footer />
-		</>
-	);
-};
+	const setToValue = (newValue) => {
+		setValue(newValue);
+	};
 
-const Footer = () => {
 	return (
 		<div>
-			greeting app created by{" "}
-			<a href="https://github.com/mluukkai">mluukkai</a>
+			{value}
+			<Display value={value} />
+			<Button
+				handleClick={() => setToValue(1000)}
+				text="thousand"
+			/>
+			<Button
+				handleClick={() => setToValue(0)}
+				text="reset"
+			/>
+			<Button
+				handleClick={() => setToValue(value + 1)}
+				text="increment"
+			/>
 		</div>
 	);
 };
+const Button = (props) => (
+	<button onClick={props.handleClick}>{props.text}</button>
+);
+
+const Display = (props) => <div>{props.value}</div>;
 export default App;
